@@ -8,7 +8,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.setGlobalPrefix("api");
   app.enableCors({
-    origin: ['http://localhost:8000', 'https://escape-plum.vercel.app'],
+    // adjust if needed
+    origin: "*",
     methods: 'GET,PUT,POST,DELETE',
     allowedHeaders: 'Content-Type, Authorization',
     preflightContinue: false,

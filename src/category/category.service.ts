@@ -6,6 +6,7 @@ import { Query } from 'express-serve-static-core';
 import { CategoryGetProps } from './category.controller';
 import { User } from 'src/auth/schemas/user.schema';
 import { CreateCategoryDto } from './dto/create-category.dto';
+import { UpdateCategoryDto } from './dto/update-category.dto';
 
 @Injectable()
 export class CategoryService {
@@ -45,5 +46,18 @@ export class CategoryService {
 
     const response = await this.categoryModel.create(data);
     return response;
+  }
+
+  async updateById(id: string, category: UpdateCategoryDto, user: User): Promise<Category> {
+    const data = Object.assign(category, { updatedBy: user._id });
+
+    return await this.categoryModel.findByIdAndUpdate(id, data, {
+      new: true,
+      runValidators: true,
+    });
+  }
+
+  async deleteById(id: string): Promise<Category> {
+    return await this.categoryModel.findByIdAndDelete(id);
   }
 }

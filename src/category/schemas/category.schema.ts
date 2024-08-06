@@ -15,6 +15,9 @@ export class Category extends Document {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   createdBy: User;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
+  updatedBy?: User;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(Category);
